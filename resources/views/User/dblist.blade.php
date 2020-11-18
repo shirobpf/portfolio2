@@ -32,11 +32,11 @@
 </head>
 
 <body>
-  <form action="/Users/show" method="post" class="show">
+  <form action="/Users/login" method="post" class="login">
   <table>
     @csrf
     <tr>
-      <th>show</th>
+      <th>Login</th>
     <tr>
       <th>email</th>
       <td><input type="text" name="email"></td>
@@ -53,7 +53,7 @@
     <table>
       @csrf
       <tr>
-        <th>add</th>
+        <th>新規登録</th>
       <tr>
         <th>email</th>
         <td><input type="text" name="email"></td>
@@ -61,6 +61,10 @@
       <tr>
           <th>パスワード</th>
           <td><input type="text" name="possword"></td>
+      <tr>
+      <tr>
+          <th>パスワード確認入力</th>
+          <td><input type="text" name="posswordConfirmation"></td>
       <tr>
     <table>
     <button>送信</button> 

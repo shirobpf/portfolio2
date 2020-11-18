@@ -25,7 +25,7 @@ Route::get('/', function () {
 Route::get('/UsersEntry',[UsersEntryController::class,'input']);
 Route::patch('/UsersEntry',[UsersEntryController::class,'confirm']);
 Route::get('/Users/list',[UsersOperateController::class,'index']);
-Route::post('/Users/show',[UsersOperateController::class,'show']);
+Route::post('/Users/login',[UsersOperateController::class,'login']);
 Route::get('/Users/show', [UsersOperateController::class, 'show']);
 Route::post('/Users/show', [UsersOperateController::class, 'show']);
 Route::post('/testjson', function (Request $request) {

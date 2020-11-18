@@ -5,32 +5,59 @@ use App\Models\UserOperate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PhpMyAdmin\Console;
+use App\User;
 
 class UsersOperateController extends Controller
 {
+    //ユーザー全件参照
     public function index(Request $request)
     {
         $users =  DB::select('select * from users');
         return view('User.dblist',['users'=> $users]);
     }
 
+    //ユーザー追加　※11/18 未作成
     public function create(Request $request)
     {
-        $param = [
-            'email' => $request->email,
-            'password' => $request->password,
-        ];
-        DB::insert('insert into users (email,password) value (email,password)', $param);
-        return redirect('User.dblist');
-    }
+        //データ初期化
+        $result = false;
+        $message = '';
 
+        $Newemail = $request->email;
+        $Newpassword = $request->password;
+        $passwordConfirmation = $request->passwordConfirmation;
+        
+        $users = DB::table('users')->where('email',$Newemail)->first();
+
+        //アドレスがあるか確認
+        if(empty($users))
+        {
+            if($Newpassword == $passwordConfirmation)
+            {
+                $message = '登録しました';
+                return $message;
+              
+                $users = new User;
+                $users ->email = $request->$Newemail;
+                $users ->password = $request->$Newpassword;
+                $users ->save();
+
+            }else{
+                $message = 'パスワードを確認してください';
+                return $message;
+            }
+        }else{
+          $message = 'そのアドレスはすでに登録されています';
+          return $message;
+        }
+    }
     public function store(Request $request)
     {
         //
     }
 
     //ユーザーデータ参照
-    public function show(Request $request)
+    public function login(Request $request)
     {
         //データ初期化
         $result = false;
@@ -67,8 +94,6 @@ class UsersOperateController extends Controller
             'id' => $users->id,
             'email' => $users->email,
             'password' => $users->password,
-            'findData' => $findData,
-            'request_password' => $password,
             'name_family' => $users->name_family,
             'name_first' => $users->name_first,
             'message' => $message
