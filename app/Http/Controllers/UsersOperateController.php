@@ -1,22 +1,27 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\UserOperate;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PhpMyAdmin\Console;
-use App\User;
 
 class UsersOperateController extends Controller
 {
-    //ユーザー全件参照
+    /***********************
+        ユーザー参照
+    **********************/
+
     public function index(Request $request)
     {
-        $users =  DB::select('select * from users');
-        return view('User.dblist',['users'=> $users]);
+        $users = user::select('id','name_family','name_first','email','email_verified','password')->get();
+        return view('User.dblist',['users'=>$users]);
     }
 
-    //ユーザー追加　※11/18 未作成
+    /****************************
+            ユーザー追加
+　          ※11/18 未作成
+    *****************************/
     public function create(Request $request)
     {
         //データ初期化
@@ -50,13 +55,19 @@ class UsersOperateController extends Controller
           $message = 'そのアドレスはすでに登録されています';
           return $message;
         }
+
+        return redirect('/');
     }
+
     public function store(Request $request)
     {
         //
     }
 
-    //ユーザーデータ参照
+    /********************************
+             ユーザーログイン
+    *********************************/
+
     public function login(Request $request)
     {
         //データ初期化
@@ -69,6 +80,7 @@ class UsersOperateController extends Controller
 
         $users = DB::table('users')->where('email',$email)->first();
         $findData = DB::table('users')->where('email',$email)->first('password');
+        $userTableName = (new User())->getTable();
 
         //アドレスがあるか確認
         if(empty($users))
@@ -96,7 +108,8 @@ class UsersOperateController extends Controller
             'password' => $users->password,
             'name_family' => $users->name_family,
             'name_first' => $users->name_first,
-            'message' => $message
+            'message' => $message,
+            'table'=> $userTableName            
             ]);
         }else{
         //該当レコードなしの処理
@@ -107,28 +120,55 @@ class UsersOperateController extends Controller
             'message' => $message
             ]);
         }
-        return $responses;
+
+        return view('User.userResult',compact('responses'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    /************************
+         ユーザー詳細
+    *************************/
+
+    public function details(Request $request)
+    {
+        //データ初期化
+        $id =  $request->id;
+        $userdata = null;
+
+        $user = user::where('id',$id)->first();
+
+        $userdata = response()->json(
+            [
+            'id' => $user->id,
+            'email' => $user->email,
+            'password' => $user->password,
+            'name_family' => $user->name_family,
+            'name_first' => $user->name_first,
+            'email_verified' => $user->email_verified,
+            'email_verified_at' => $user->email_verified_at,
+            'telnumber' => $user->telnumber,
+            'postalcode' => $user->postalcode,
+            'address' => $user->address,
+            'remember_token' => $user->remember_token,
+            'created_at' => $user->created_at,
+            'updated_at' => $user->updated_at,
+            'deleted_at' => $user->deleted_at,
+            ]);
+                
+        return view('User.userEdit',compact('userdata'));
+    }
+
+    /***********************
+         ユーザー更新        
+    ***********************/
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    /***********************
+        ユーザー削除
+    ***********************/
+     public function destroy($id)
     {
         //
     }

@@ -18,6 +18,7 @@ class CreateUserOperatesTable extends Migration
             $table->string('name_family',40)->nullable()->comment('姓');
             $table->string('name_first',40)->nullable()->comment('名');
             $table->string('email')->unique()->comment('メールアドレス');
+            $table->boolean('email_verified')->default(false)->comment('アドレス認証');
             $table->timestamp('email_verified_at')->nullable()->comment('メールアドレス変更日');
             $table->string('password')->comment('パスワード');
             $table->integer('telnumber')->nullable()->comment('電話番号');

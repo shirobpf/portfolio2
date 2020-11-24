@@ -9,30 +9,23 @@
     th {
       background-color: black;
       color: white;
-      padding: 5px 13px;
+      padding: 5px 30px;
     }
 
     td {
       border: 1px solid black;
-      padding: 5px 13px;
+      padding: 5px 30px;
       text-align: center;
     }
 
     button {
       border: 1px solid black;
-      padding: 5px 10px;
+      padding: 5px 30px;
       text-align: center;
     }
     
     .show{
       display: block;
-    }
-
-    *,
-    *:before,
-    *:after {
-      -webkit-box-sizing: inherit;
-      box-sizing: inherit;
     }
 
     html {
@@ -95,71 +88,49 @@
       border-radius: 100vh;
     }
 
+
   </style>
 </head>
 
 <body>
-  <form action="/login" method="post" class="login">
-  <table>
-    @csrf
-    <tr>
-      <th>Login</th>
-    <tr>
-      <th>email</th>
-      <td><input type="text" name="email"></td>
-    <tr>
-    <tr>
-        <th>パスワード</th>
-        <td><input type="text" name="password"></td>
-    <tr>
-  <table>
-  <button>送信</button> 
-  </form>
-
-  <form action="/create" method="post" class="create">
-    <table>
-      @csrf
-      <tr>
-        <th>新規登録</th>
-      <tr>
-        <th>email</th>
-      <td><input type="text" name="email"></td>
-      <tr>
-      <tr>
-          <th>パスワード</th>
-      <td><input type="text" name="possword"></td>
-      <tr>
-      <tr>
-          <th>パスワード確認入力</th>
-          <td><input type="text" name="posswordConfirmation"></td>
-      <tr>
-    <table>
-    <button>送信</button> 
-    </form>
-  <table>
+ <table>
     <tr>
       <th>id</th>
       <th>姓</th>
       <th>名</th>
       <th>メールアドレス</th>
       <th>アドレス認証</th>
+      <th>アドレス認証日</th>
       <th>パスワード</th>
-      <th>詳細</th>
-      <th>削除</th>
+      <th>電話番号</th>
+      <th>郵便番号</th>
+      <th>住所</th>
+      <th>トークン</th>
+      <th>作成日</th>
+      <th>更新日</th>
+      <th>削除日</th>
     </tr>
-    @foreach ($users as $user)
     <tr>
-      <td>{{$user->id}}</td>  
-      <td>{{$user->name_family}}</td>
-      <td>{{$user->name_first}}</td>
-      <td>{{$user->email}}</td>      
-      <td>{{$user->email_verified}}</td>
-      <td>{{$user->password}}</td>
-     @csrf
-      <td><a href="/details/{{$user->id}}" class="btn btn--orange btn--radius">詳細</a> </td>
-      <td><a href="/destroy/{{$user->id}}" class="btn btn--blue btn--radius">削除</a> </td>
+      @php 
+         $result_json  = $userdata->content();
+         $user = json_decode( $result_json, true );
+      @endphp
+      <td>{{$user['id']}}</td>  
+      <td>{{$user['name_family']}}</td>
+      <td>{{$user['name_first']}}</td>
+      <td>{{$user['email']}}</td>      
+      <td>{{$user['email_verified']}}</td>
+      <td>{{$user['email_verified_at']}}</td>
+      <td>{{$user['password']}}</td>
+      <td>{{$user['telnumber']}}</td>
+      <td>{{$user['postalcode']}}</td>
+      <td>{{$user['address']}}</td>
+      <td>{{$user['remember_token']}}</td>
+      <td>{{$user['created_at']}}</td>
+      <td>{{$user['updated_at']}}</td>
+      <td>{{$user['deleted_at']}}</td>    
     </tr>
-    @endforeach
   </table>
+  <a href="/list" class="btn btn--orange btn--radius">戻る</a>
 </body>
 </html>

@@ -32,6 +32,14 @@
 </head>
 
 <body>
-  <p>{{$responses}}</p>
+@php
+  
+  $result_json  = $responses->content();
+  $responses = json_decode( $result_json, true );
+
+@endphp
+  <p>{{$responses['result']}}</p>
+  <p>{{$responses['id'].$responses['email']}}</p>
+  <p>{{$responses['message']}}</p>
 </body>
 </html>
