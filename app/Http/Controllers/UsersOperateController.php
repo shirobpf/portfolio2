@@ -15,7 +15,7 @@ class UsersOperateController extends Controller
     public function index(Request $request)
     {
         $users = user::select('id','name_family','name_first','email','email_verified','password')->get();
-        return view('User.dblist',['users'=>$users]);
+        return view('User.userlist',['users'=>$users]);
     }
 
     /****************************
@@ -168,8 +168,16 @@ class UsersOperateController extends Controller
     /***********************
         ユーザー削除
     ***********************/
-     public function destroy($id)
+     public function destroy(Request $request)
     {
-        //
+        $id =  $request->id;
+        $userdata = null;
+
+        $user = user::where('id',$id)->first();
+        $check = null;
+
+        
+
+
     }
 }

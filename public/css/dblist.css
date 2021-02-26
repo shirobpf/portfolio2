@@ -1,0 +1,285 @@
+/*
+Reset Stylesheet
+Author: Richard Clark - http://richclarkdesign.com
+
+*/
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+
+body {
+    line-height:1;
+}
+
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section {
+    display:block;
+}
+
+nav ul {
+    list-style:none;
+}
+
+blockquote, q {
+    quotes:none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content:'';
+    content:none;
+}
+
+a {
+    margin:0;
+    padding:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+
+/* change colours to suit your needs */
+ins {
+    background-color:#ff9;
+    color:#000;
+    text-decoration:none;
+}
+
+/* change colours to suit your needs */
+mark {
+    background-color:#ff9;
+    color:#000;
+    font-style:italic;
+    font-weight:bold;
+}
+
+del {
+    text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+    border-bottom:1px dotted;
+    cursor:help;
+}
+
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+
+/* change border colour to suit your needs */
+hr {
+    display:block;
+    height:1px;
+    border:0;  
+    border-top:1px solid #cccccc;
+    margin:1em 0;
+    padding:0;
+}
+
+input, select {
+    vertical-align:middle;
+}
+/* end reset style sheets */
+
+.header {
+  padding:10px;
+  font-size: 14px;
+  background-color: bisque;
+}
+.left {
+  display: block;
+  cursor: pointer; 
+  align-items: center;
+  margin-left: 20px;
+}
+.right {
+  align-items: center;
+}
+.right p {
+  margin-right: 20px;
+  cursor: pointer;
+  color: black;
+}
+.flex {
+  display: flex;
+}
+.between{
+  justify-content: space-between;
+}
+
+th {
+  background-color: black;
+  color: white;
+  padding: 5px 13px;
+}
+
+td {
+  border: 1px solid black;
+  padding: 5px 13px;
+  text-align: center;
+}
+
+button {
+  border: 1px solid black;
+  padding: 5px 10px;
+  text-align: center;
+}
+
+.show{
+  display: block;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 62.5%;/*rem算出をしやすくするために*/
+}
+
+.btn,
+a.btn,
+button.btn {
+ font-size: 0.6rem;
+  font-weight: 700;
+  line-height: 0.7;
+  position: relative;
+  display: inline-block;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  color: #212529;
+  border-radius: 0.5rem;
+}
+
+.btn--orange,
+a.btn--orange {
+  color: #fff;
+  background-color: #eb6100;
+}
+.btn--orange:hover,
+a.btn--orange:hover {
+  color: #fff;
+  background: #f5dd00;
+}
+
+a.btn--radius {
+  border-radius: 100vh;
+}
+
+.btn--blue,
+a.btn--blue {
+  color: #fff;
+  background-color:blue;
+}
+.btn--blue:hover,
+a.btn--blue:hover {
+  color: #fff;
+  background: skyblue;
+}
+
+a.btn--radius {
+  border-radius: 100vh;
+}
+
+/*ナビ*/
+nav{
+  margin: 0;
+  margin-bottom: 10px;
+  background-color: gray;
+  color: white;
+}
+nav ul{
+  display: table;
+  width: 100%;
+  margin: 0;  
+  padding: 0;
+  text-align: center;
+}
+nav ul li{
+  display: table-cell;
+  min-width: 50px;
+  width: 100px;
+  border-right: 1px solid #ccc;
+}
+nav ul li:first-child{
+  border-left: 1px solid #ccc;
+}
+nav ul li a{
+  display: block;
+  text-decoration: none;
+  color: white;
+  padding: 5px 0 5px;
+  border-bottom: 5px solid rgba(0,0,0,0);
+}
+nav ul li a:hover{
+  padding: 0 ;
+  color: black;
+  padding: 5px 0 5px;
+  background-color:white;
+  border-bottom: 5px solid black;
+
+}
+
+/*CSVエクスポート モーダル*/
+.content{
+    margin: 0 auto;
+    padding: 40px;
+}
+.modal{
+    display: none;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+.modal__bg{
+    background: rgba(0,0,0,0.8);
+    height: 100vh;
+    position: absolute;
+    width: 100%;
+}
+.modal__content{
+    background: #fff;
+    left: 50%;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 60%;
+}
